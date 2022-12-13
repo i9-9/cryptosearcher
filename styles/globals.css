@@ -26,7 +26,6 @@ body {
 }
 
 .neumorph2 {
-  
   background: linear-gradient(145deg, #9595a5, #b2b1c4);
   box-shadow:  20px 20px 65px #73727e,
              -20px -20px 65px #d9d8f0;
@@ -36,9 +35,7 @@ body {
 	animation: rotacion 5s linear infinite alternate;
 }
 
-
 @keyframes rotacion {
 	from{transform: rotateY(0deg);}
-
 	to{transform: rotateY(360deg)} 
 }

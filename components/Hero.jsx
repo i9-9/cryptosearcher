@@ -2,34 +2,41 @@ import React, { useState } from 'react';
 import CoinItem from './CoinItem';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import coin from '../pages/coins/[coin].js';
+// import coin from '../pages/coins/[coin].js';
 
-const Hero = ( props ) => {
+const Hero = ( {coins, tableCoins} ) => {
   
-    const [name, setName] = useState('')
+    const [coinsita, setCoinsita] = useState([]);
+    const [name, setName] = useState('');
 
     function handleChange(e) {
         var lowerCase = e.target.value.toLowerCase();
         setName(lowerCase);
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        onSubmit(name)
-        setName("")
-    }
+    const filteredData = coins.filter(
+        element => {
+            return (
+                element.name
+                .toLowerCase()
+                .includes(name.toLowerCase())
+            );
+        }
+    );
+    
   
     const router = useRouter();
 
     return (
     <div className='h-screen bg-[#A6A5B7] max-w-5xl mx-auto mt-20'>
-        <form onSubmit={handleSubmit} className='flex justify-center p-10'>
+        <form className='flex justify-center p-10'>
             <input type="text"
             id="crypto-search"
-            className="neumorph mr-2 form-control block w-full px-3 py-1.5 text-base font-normal bg-white bg-clip-padding text-white rounded transition ease-in-out m-0
+            className="neumorph mr-2 form-control block w-full px-3 py-1.5 text-base font-normal bg-white bg-clip-padding text-black placeholder-black rounded transition ease-in-out m-0
             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             name="text"
             autoComplete='off'
+            placeholder='Look up a cryptocurrency...'
             value={name}
             onChange={handleChange}
             />
@@ -39,7 +46,7 @@ const Hero = ( props ) => {
         </form>
             <div className='flex justify-center px-10 pb-10 '>
                 <div>
-                    <div className='neumorph flex flex-row justify-between align-middle rounded-lg font-bold my-8 mx-4 py-3 px-4 space-x-32 text-center shadow-md'>
+                    <div className='container neumorph flex flex-row justify-between align-middle rounded-lg font-bold my-8 mx-4 py-3 px-4 space-x-40 text-center shadow-md'>
                         <p>#</p>
                         <p className=''>Coin</p>
                         <p>Price</p>
@@ -48,10 +55,10 @@ const Hero = ( props ) => {
                         <p className='hidden sm:flex'>Mkt Cap</p>
 
                     </div>
-                    {props.coins.map(coins => {
+                    {filteredData.map(coin => {
                         return(
-                            <Link href={`/coins/${coins.id}`} key={coins.id}>
-                                <CoinItem coins={coins} />
+                            <Link href={`/coins/${coin.id}`} key={coin.id}>
+                                <CoinItem coins={coin} />
                             </Link>
                         )
                     })}

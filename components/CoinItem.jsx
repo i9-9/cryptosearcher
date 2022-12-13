@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const CoinItem = (props) => {
   return (
-    <div className='neumorph flex flex-row align-middle rounded-lg font-bold my-8 mx-4 py-3 px-4 space-x-40 items-center hover:scale-105 text-center shadow-md hover:transition ease-in-out delay-150 hover:cursor-pointer'>
+    <div className='container neumorph flex flex-row align-middle rounded-lg font-bold my-8 mx-4 py-3 px-4 space-x-40 items-center hover:scale-105  hover:transition ease-in-out delay-150 hover:cursor-pointer '>
         <p>{props.coins.market_cap_rank}</p>
         <div className='img-symbol uppercase flex-row flex items-center space-x-3'>
             <Image src={props.coins.image} alt='' width={40} height={40} className='' />

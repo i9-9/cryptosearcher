@@ -9,15 +9,17 @@ import { useRouter } from 'next/router';
 export default function Home() {
   
   const [coins, setCoins] = useState([])
+  const [tableCoins, setTableCoins] = useState([]);
 
   const url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false'
 
   useEffect(() => {
       axios.get(url).then((response) => {
           setCoins(response.data)
-          
+          setTableCoins(response.data)
+          console.log(response.data)
       }).catch((error) => {
-          
+          console.log(error)
       })
   }, [])
   
@@ -29,7 +31,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <Hero coins={coins} />
+      <Hero coins={coins} table={tableCoins} />
     </div>
   )
 }
